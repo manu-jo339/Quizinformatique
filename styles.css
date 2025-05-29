@@ -1,0 +1,51 @@
+body.light-mode {
+  background-color: #f8f9fa;
+  color: #000;
+}
+body.dark-mode {
+  background-color: #000814;
+  color: #fff;
+}
+.neon-text {
+  color: #0ff;
+  text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff;
+}
+.neon-button {
+  background-color: #0ff;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+  transition: 0.3s ease;
+}
+.neon-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
+}
+.avatar {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  border-radius: 50%;
+}
+.avatar:hover {
+  transform: scale(1.1);
+}
+.selected-avatar {
+  border: 3px solid #0ff;
+  box-shadow: 0 0 10px #0ff;
+}
+footer {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #00ffff;
+    font-family: 'Orbitron', sans-serif;
+    opacity: 0.7;
+  }
+  .quiz-container {
+    max-width: 600px;
+    width: 100%;
+  }
+    

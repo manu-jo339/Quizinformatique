@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz Informatique </title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: radial-gradient(circle at center, #001f1f, #000000);
+      font-family: 'Orbitron', sans-serif;
+      color: #00ffff;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin: 40px 0 20px;
+      font-size: 2.5em;
+      color: #00ffcc;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    #quiz-container {
+      background-color: rgba(0, 66, 66, 0.8);
+      border-radius: 20px;
+      box-shadow: 0 0 20px #00ffff;
+      padding: 25px 30px;
+      max-width: 600px;
+      width: 90%;
+      animation: fadeIn 2s ease-in-out;
+      position: relative;
+    }
+
+    #levelDisplay {
+      font-size: 1.2em;
+      font-weight: 600;
+      color: #00ffff;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    #timer {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 25px;
+      color: #00ffff;
+      text-align: right;
+      user-select: none;
+    }
+
+    #progress-bar {
+      width: 100%;
+      background-color: rgba(0, 128, 128, 0.3);
+      border-radius: 15px;
+      overflow: hidden;
+      height: 15px;
+      margin-bottom: 25px;
+      box-shadow: inset 0 0 10px #00ffff;
+    }
+
+    #progress {
+      height: 100%;
+      background-color: #00ffff;
+      width: 0%;
+      transition: width 0.4s ease;
+      border-radius: 15px;
+    }
+
+    #question {
+      font-size: 1.4em;
+      margin-bottom: 25px;
+      min-height: 80px;
+      color: #00ffff;
+    }
+
+    #answers {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .answer-btn {
+      background-color: rgba(0, 255, 255, 0.15);
+      color: #00ffff;
+      border: 2px solid #00ffff;
+      border-radius: 15px;
+      padding: 15px 20px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      text-align: left;
+      user-select: none;
+    }
+
+    .answer-btn:hover:not(:disabled) {
+      background-color: rgba(0, 255, 255, 0.35);
+      transform: scale(1.05);
+    }
+
+    .answer-btn:disabled {
+      background-color: rgba(0, 128, 128, 0.3);
+      border-color: rgba(0, 128, 128, 0.3);
+      cursor: default;
+      color: #004c4c;
+      transform: none;
+    }
+
+    #finalScore {
+      text-align: center;
+      margin-top: 30px;
+      display: none;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    #finalScore h2 {
+      font-size: 2em;
+      color: #00ffff;
+      margin-bottom: 10px;
+    }
+
+    #medalDisplay {
+      font-size: 3em;
+      margin: 15px 0;
+      color: #00ffff;
+    }
+
+    #bestScore {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-top: 10px;
+      color: #00ffff;
+    }
+
+    #restartBtn {
+      margin-top: 20px;
+      padding: 15px 35px;
+      font-size: 1.2em;
+      background-color: #00ffff;
+      color: #001f1f;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      user-select: none;
+    }
+
+    #restartBtn:hover {
+      background-color: #00ccff;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      0% {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    #backgroundVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.3; /* tu peux ajuster l'opacité */
+}
+
+  </style>
+</head>
+<body>
+  <video autoplay muted loop id="backgroundVideo">
+    <source src="background.mp4" type="video/mp4">
+    Ton navigateur ne supporte pas la vidéo HTML5.
+  </video>
+  
+  <h1>Quiz Informatique</h1>
+  <div id="quiz-container">
+    <div id="levelDisplay"></div>
+    <div id="timer"></div>
+    <div id="progress-bar"><div id="progress"></div></div>
+    <div id="question"></div>
+    <div id="answers"></div>
+  </div>
+  <div class="col-12 col-md-6">...</div>
+  <div class="container mt-4">
+      <div class="quiz-container p-3 rounded shadow w-100 w-md-75 mx-auto">
+    
+  <div id="finalScore">
+    <h2>Ton score final est : <span id="finalResult"></span></h2>
+    <p id="bestScore"></p>
+    <p id="medalDisplay"></p>
+    <button id="restartBtn">Recommencer</button>
+  </div>
+
+  <!-- Sons -->
+  <audio id="correctSound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg" preload="auto"></audio>
+  <audio id="wrongSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg" preload="auto"></audio>
+
+  <script>
+    const quizData = {
+      1: [
+        {q: "Quel langage est principalement utilisé pour créer des pages web ?", choices: ["Python", "JavaScript", "Java", "C#"], correct: 1},
+        {q: "Quelle commande Linux permet de lister les fichiers ?", choices: ["ls", "cd", "mkdir", "rm"], correct: 0},
+        {q: "En SQL, que signifie SELECT ?", choices: ["Choisir", "Supprimer", "Modifier", "Insérer"], correct: 0},
+        {q: "Quel protocole est utilisé pour transférer des pages web ?", choices: ["FTP", "HTTP", "SMTP", "SSH"], correct: 1},
+        {q: "Que signifie RAM ?", choices: ["Read Access Memory", "Random Access Memory", "Run Access Memory", "Rapid Access Memory"], correct: 1},
+        {q: "Quelle extension de fichier est associée aux scripts Python ?", choices: [".py", ".java", ".js", ".exe"], correct: 0},
+        {q: "Quel est l’équivalent de 'print' en JavaScript ?", choices: ["echo", "console.log", "printf", "output"], correct: 1},
+        {q: "Quelle structure de données est une collection ordonnée ?", choices: ["Set", "List", "Map", "Tuple"], correct: 1}
+      ],
+      2: [
+        {q: "Quel protocole réseau est utilisé pour attribuer une adresse IP automatiquement ?", choices: ["DNS", "DHCP", "FTP", "HTTP"], correct: 1},
+        {q: "Quelle commande permet de vérifier la connectivité réseau sous Windows ?", choices: ["ping", "tracert", "ipconfig", "netstat"], correct: 0},
+        {q: "En Python, comment définit-on une fonction ?", choices: ["func", "function", "def", "define"], correct: 2},
+        {q: "Quelle commande permet de supprimer un dossier sous Linux ?", choices: ["rm -r", "del", "rmdir", "delete"], correct: 0},
+        {q: "Quelle est la portée d’une variable déclarée avec 'let' en JavaScript ?", choices: ["Globale", "Locale au bloc", "Locale à la fonction", "Locale au fichier"], correct: 1},
+        {q: "Quel est l’acronyme de 'URL' ?", choices: ["Uniform Resource Locator", "Universal Resource Link", "Unified Remote Login", "Universal Request Language"], correct: 0},
+        {q: "Dans une base de données relationnelle, une 'clé primaire' sert à ?", choices: ["Identifier une ligne", "Relier des tables", "Stocker des données", "Indexer des colonnes"], correct: 0},
+        {q: "Lequel n’est pas un langage de programmation ?", choices: ["HTML", "Java", "C++", "Python"], correct: 0}
+      ]
+    };
+
+    let currentLevel = 1;
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let timerInterval;
+    let timeLeft = 15;
+
+    const levelDisplay = document.getElementById("levelDisplay");
+    const timerEl = document.getElementById("timer");
+    const progressBar = document.getElementById("progress");
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+    const finalScoreEl = document.getElementById("finalScore");
+    const finalResult = document.getElementById("finalResult");
+    const restartBtn = document.getElementById("restartBtn");
+    const bestScoreEl = document.getElementById("bestScore");
+    const medalDisplay = document.getElementById("medalDisplay");
+    const correctSound = document.getElementById("correctSound");
+    const wrongSound = document.getElementById("wrongSound");
+
+    function startQuiz() {
+      finalScoreEl.style.display = "none";
+      currentLevel = 1;
+      currentQuestionIndex = 0;
+      score = 0;
+      levelDisplay.textContent = "Niveau " + currentLevel;
+      showQuestion();
+      startTimer();
+      updateProgressBar();
+    }
+
+    function showQuestion() {
+      clearInterval(timerInterval);
+      timeLeft = 15;
+      timerEl.textContent = `Temps restant : ${timeLeft}s`;
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = `Temps restant : ${timeLeft}s`;
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          selectAnswer(null);
+        }
+      }, 1000);
+
+      const questionData = quizData[currentLevel][currentQuestionIndex];
+      questionEl.textContent = questionData.q;
+      answersEl.innerHTML = "";
+
+      questionData.choices.forEach((choice, index) => {
+        const btn = document.createElement("button");
+        btn.className = "answer-btn";
+        btn.textContent = choice;
+        btn.addEventListener("click", () => selectAnswer(index));
+        answersEl.appendChild(btn);
+      });
+
+      levelDisplay.textContent = `Niveau ${currentLevel} - Question ${currentQuestionIndex + 1} / ${quizData[currentLevel].length}`;
+    }
+
+    function selectAnswer(selectedIndex) {
+      clearInterval(timerInterval);
+      const questionData = quizData[currentLevel][currentQuestionIndex];
+      const buttons = answersEl.querySelectorAll("button");
+      buttons.forEach((btn, i) => {
+        btn.disabled = true;
+        if(i === questionData.correct){
+          btn.style.backgroundColor = "#00ffcc";
+          btn.style.color = "#001f1f";
+        }
+        if(selectedIndex === i && selectedIndex !== questionData.correct){
+          btn.style.backgroundColor = "#ff3333";
+          btn.style.color = "#fff";
+        }
+      });
+
+      if(selectedIndex === questionData.correct) {
+        score++;
+        correctSound.play();
+      } else {
+        wrongSound.play();
+      }
+
+      updateProgressBar();
+
+      setTimeout(() => {
+        currentQuestionIndex++;
+        if(currentQuestionIndex >= quizData[currentLevel].length) {
+          if(currentLevel === 1) {
+            currentLevel = 2;
+            currentQuestionIndex = 0;
+            levelDisplay.textContent = "Niveau " + currentLevel;
+            showQuestion();
+            startTimer();
+          } else {
+            endQuiz();
+          }
+        } else {
+          showQuestion();
+          startTimer();
+        }
+      }, 1500);
+    }
+
+    function updateProgressBar() {
+      const totalQuestions = quizData[1].length + quizData[2].length;
+      const answeredQuestions = (currentLevel === 1 ? currentQuestionIndex : quizData[1].length + currentQuestionIndex);
+      let progressPercent = (answeredQuestions / totalQuestions) * 100;
+      progressBar.style.width = progressPercent + "%";
+    }
+
+    function startTimer() {
+      timeLeft = 15;
+      timerEl.textContent = `Temps restant : ${timeLeft}s`;
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = `Temps restant : ${timeLeft}s`;
+        if(timeLeft <= 0){
+          clearInterval(timerInterval);
+          selectAnswer(null);
+        }
+      }, 1000);
+    }
+
+    function endQuiz() {
+      document.getElementById("quiz-container").style.display = "none";
+      finalScoreEl.style.display = "block";
+      finalResult.textContent = `${score} / ${quizData[1].length + quizData[2].length}`;
+
+      // Meilleur score dans localStorage
+      let bestScore = localStorage.getItem("bestScore");
+      if(!bestScore || score > bestScore){
+        localStorage.setItem("bestScore", score);
+        bestScore = score;
+      }
+
+      bestScoreEl.textContent = `Meilleur score : ${bestScore} / ${quizData[1].length + quizData[2].length}`;
+      function endGame() {
+    document.getElementById("quiz").style.display = "none"; // Cache le quiz
+    document.getElementById("finalScore").style.display = "block"; // Affiche le score
+  
+    const playerName = document.getElementById("name").value || "Joueur";
+    const finalScore = score;
+  
+    document.getElementById("playerNameDisplay").textContent = playerName;
+    document.getElementById("scoreDisplay").textContent = finalScore + " / " + questions.length;
+  }
+  function shareScore() {
+    const playerName = document.getElementById("playerNameDisplay").textContent;
+    const scoreText = document.getElementById("scoreDisplay").textContent;
+    const text = `Je suis ${playerName} et j'ai obtenu un score de ${scoreText} sur le quiz informatiqu ! 💪`;
+  
+    const shareURL = `https://wa.me/?text=${encodeURIComponent(text)}`;
+    window.open(shareURL, '_blank');
+  }
+    
+
+      // Affichage médaille
+      const totalQ = quizData[1].length + quizData[2].length;
+      const ratio = score / totalQ;
+      if(ratio === 1) {
+        medalDisplay.textContent = "🏆 Médaillé d'or !";
+      } else if(ratio >= 0.75) {
+        medalDisplay.textContent = "🥈 Médaillé d'argent !";
+      } else if(ratio >= 0.5) {
+        medalDisplay.textContent = "🥉 Médaillé de bronze !";
+      } else {
+        medalDisplay.textContent = "⏳ Continue à t'entraîner !";
+      }
+    }
+
+    restartBtn.addEventListener("click", () => {
+      document.getElementById("quiz-container").style.display = "block";
+      finalScoreEl.style.display = "none";
+      startQuiz();
+    });
+
+    // Démarrage automatique
+    startQuiz();
+  </script>
+  <script src="script.js"></script>
+
+  <footer style="margin-top: 50px; text-align: center; font-size: 0.9em; color: #00ffff;">
+    Quiz créé par Emmanuel TSINGAMBIA – Tous droits réservés © 2025
+  </footer>
+  <div id="finalScore" style="display:none; text-align:center;">
+    <h2>Bravo <span id="playerNameDisplay"></span> !</h2>
+    <p>Ton score final est : <span id="scoreDisplay"></span></p>
+    <button onclick="shareScore()">Partager mon score</button>
+  </div>
+  
+</body>
+</html>
