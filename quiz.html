@@ -213,21 +213,71 @@
   <script>
     const quizData = {
       1: [
+        {q: "Que signifie l'erreur Windows 0x80070005 ?", choices: ["Accès refusé", "Fichier introuvable", "Disque plein", "Problème de pilote"], correct: 0},
+        {q: "Quelle commande permet de créer un nouveau répertoire ?", choices: ["mkdir", "rmdir", "touch", "nano"], correct: 0},
+        {q: "Quelle commande permet de changer les droits d’un fichier ?", choices: ["chmod", "ls", "sudo", "echo"], correct: 0},
         {q: "Quel langage est principalement utilisé pour créer des pages web ?", choices: ["Python", "JavaScript", "Java", "C#"], correct: 1},
+        {q: "Quelle commande permet de supprimer un fichier sous Linux ?", choices: ["rm", "del", "erase", "cut"], correct: 0},
+        {q: "Quel est le rôle du fichier hosts ?", choices: ["Associer des IP à des noms", "Lancer un service", "Vérifier l’espace disque", "Configurer l’imprimante"], correct: 0},
         {q: "Quelle commande Linux permet de lister les fichiers ?", choices: ["ls", "cd", "mkdir", "rm"], correct: 0},
         {q: "En SQL, que signifie SELECT ?", choices: ["Choisir", "Supprimer", "Modifier", "Insérer"], correct: 0},
+        {q: "Quelle commande Linux permet de créer un fichier vide ?", choices: ["touch fichier", "nano fichier", "echo > fichier", "mkdir fichier"], correct: 0},
+        {q: "Quelle commande Linux permet de changer de répertoire ?", choices: ["cd", "ls", "rm", "pwd"], correct: 0},
         {q: "Quel protocole est utilisé pour transférer des pages web ?", choices: ["FTP", "HTTP", "SMTP", "SSH"], correct: 1},
+        {q: "Que fait la commande `sfc /scannow` ?", choices: ["Répare les fichiers système", "Redémarre le système", "Efface les fichiers temporaires", "Met à jour Windows"], correct: 0},
+        {q: "Dans quel dossier Linux se trouvent les fichiers de configuration ?", choices: ["/home", "/etc", "/var", "/usr"], correct: 1},
+        {q: "Quel outil Windows permet de gérer les partitions ?", choices: ["Diskpart", "Taskmgr", "Netstat", "Chkdsk"], correct: 0},
+        {q: "Que signifie RAID en maintenance ?", choices: ["Redundant Array of Independent Disks", "Réseau d’Accès Interne Distribué", "Réinitialisation Automatique des Identifiants", "Aucune réponse correcte"], correct: 0},
+        {q: "Quel fichier stocke les comptes utilisateurs sous Linux ?", choices: ["/etc/passwd", "/etc/users", "/var/account", "/home/users"], correct: 0},
+        {q: "Quelle commande Linux liste tous les fichiers, y compris les cachés ?", choices: ["ls -a", "ls -l", "ls -h", "ls -la"], correct: 0},
+        {q: "Quel est le raccourci clavier pour ouvrir le Gestionnaire des tâches ?", choices: ["Ctrl + Shift + Esc", "Ctrl + Alt + Suppr", "Alt + Tab", "Win + R"], correct: 0},
         {q: "Que signifie RAM ?", choices: ["Read Access Memory", "Random Access Memory", "Run Access Memory", "Rapid Access Memory"], correct: 1},
         {q: "Quelle extension de fichier est associée aux scripts Python ?", choices: [".py", ".java", ".js", ".exe"], correct: 0},
-        {q: "Quel est l’équivalent de 'print' en JavaScript ?", choices: ["echo", "console.log", "printf", "output"], correct: 1},
-        {q: "Quelle structure de données est une collection ordonnée ?", choices: ["Set", "List", "Map", "Tuple"], correct: 1}
-      ],
-      2: [
+        {q: "Quelle commande Windows permet de vérifier un disque ?", choices: ["chkdsk", "format", "scan", "msinfo32"], correct: 0},
+        {q: "Que fait la commande `ping` ?", choices: ["Teste la connectivité réseau", "Lance le navigateur", "Éteint le PC", "Crée un fichier"], correct: 0},
+        {q: "Que permet la commande `sudo` sous Linux ?", choices: ["Exécuter une commande en tant qu’admin", "Redémarrer le système", "Créer un mot de passe", "Modifier le BIOS"], correct: 0},
+        {q: "Quel est l’équivalent de 'print' en JavaScript ?", choices: [ "console.log", "printf","echo", "output"], correct: 3},
+        {q: "Quelle structure de données est une collection ordonnée ?", choices: ["List","Set", "Map", "Tuple"], correct: 2},
         {q: "Quel protocole réseau est utilisé pour attribuer une adresse IP automatiquement ?", choices: ["DNS", "DHCP", "FTP", "HTTP"], correct: 1},
         {q: "Quelle commande permet de vérifier la connectivité réseau sous Windows ?", choices: ["ping", "tracert", "ipconfig", "netstat"], correct: 0},
         {q: "En Python, comment définit-on une fonction ?", choices: ["func", "function", "def", "define"], correct: 2},
+        {q: "Quelle est la différence entre maintenance curative et préventive ?", choices: ["Curative après panne, préventive avant", "Préventive est plus coûteuse", "Aucune différence", "Curative utilise plus de RAM"], correct: 0},
+        {q: "Quelle commande Linux affiche l’adresse IP ?", choices: ["ip a", "ifconfig", "hostname -I", "Toutes les réponses"], correct: 3},
+        {q: "Quel outil permet de vérifier les erreurs SMART d’un disque dur ?", choices: ["smartctl", "fsck", "chkdsk", "parted"], correct: 0},
+        {q: "Quel est le système de fichiers par défaut sous Windows ?", choices: ["NTFS", "EXT4", "FAT32", "exFAT"], correct: 0},
+        {q: "Quelle commande redémarre Linux immédiatement ?", choices: ["reboot", "shutdown now", "init 6", "Toutes les réponses"], correct: 3},
+      ],
+      2: [
+        {q: "Que signifie BSOD sous Windows ?", choices: ["Blue Screen of Death", "Basic System Output Display", "Binary Secure Output Dump", "Boot Secure Overdrive"], correct: 0},
+        {q: "Que fait la commande `chmod 755 fichier` ?", choices: ["Donne tous les droits au propriétaire, lecture/exécution aux autres", "Supprime les droits", "Active le mode administrateur", "Redémarre le fichier"], correct: 0},
+        {q: "Comment afficher l’utilisation du disque sous Linux ?", choices: ["df -h", "du -h", "lsblk", "mount"], correct: 0},
+        {q: "Quelle commande Linux permet de rechercher un mot dans un fichier ?", choices: ["grep", "find", "cat", "cut"], correct: 0},
+        {q: "Quelle est la commande Windows pour afficher l’IP ?", choices: ["ipconfig", "netconfig", "ping", "ifconfig"], correct: 0},
+        {q: "Que fait `netstat -an` ?", choices: ["Affiche les connexions réseau", "Lance le navigateur", "Modifie l’adresse MAC", "Ferme tous les ports"], correct: 0},
+        {q: "Quel fichier Linux permet de planifier une tâche cron ?", choices: ["crontab", "/etc/init.d", "/etc/rc.local", "/usr/bin/cron"], correct: 0},
+        {q: "Quelle commande Linux permet de voir les ports ouverts ?", choices: ["netstat -tulpn", "ifconfig -a", "ping -p", "ss -s"], correct: 0},
+        {q: "Qu’est-ce que UEFI ?", choices: ["Un firmware moderne", "Une commande Linux", "Un outil de partition", "Un service réseau"], correct: 0},
+        {q: "Quel port est utilisé par SSH ?", choices: ["22", "21", "23", "80"], correct: 0},
+        {q: "Quel rôle joue un serveur DHCP ?", choices: ["Attribuer des adresses IP", "Gérer les fichiers DNS", "Scanner le réseau", "Détecter les virus"], correct: 0},
+        {q: "Qu’est-ce que le fichier `/etc/fstab` ?", choices: ["Configuration de montage automatique", "Mots de passe système", "Historique des erreurs", "Liste des utilisateurs"], correct: 0},
+        {q: "Quelle commande affiche les utilisateurs connectés ?", choices: ["who", "users", "w", "Toutes les réponses"], correct: 3},
+        {q: "Quel est le rôle de GRUB ?", choices: ["Chargeur d’amorçage", "Outil de sauvegarde", "Service réseau", "Pare-feu"], correct: 0},  
+        {q: "Quel logiciel est utilisé pour faire des sauvegardes sur Windows ?", choices: ["Historique des fichiers", "sfc", "regedit", "Antivirus"], correct: 0},
+        {q: "Quelle commande Linux permet de tuer un processus ?", choices: ["kill", "end", "close", "exit"], correct: 0},
+        {q: "Comment définir les droits 777 à un fichier ?", choices: ["chmod 777 nom_fichier", "chmod +x", "sudo give-all", "ls -a"], correct: 0},
+        {q: "Que signifie le sigle BIOS ?", choices: ["Basic Input Output System", "Binary Integrated Operating System", "Basic Internal OS", "Boost Internet Output System"], correct: 0},
+        {q: "Quel outil permet de surveiller l'activité réseau en ligne de commande ?", choices: ["iftop", "top", "ps", "df"], correct: 0},
+        {q: "Quelle extension est associée à un fichier batch Windows ?", choices: [".bat", ".sh", ".exe", ".ps1"], correct: 0},
+        {q: "Comment protéger l’accès à une machine Linux ?", choices: ["Pare-feu, mises à jour, mot de passe fort", "Couper Internet", "Changer le clavier", "Créer un alias"], correct: 0},
         {q: "Quelle commande permet de supprimer un dossier sous Linux ?", choices: ["rm -r", "del", "rmdir", "delete"], correct: 0},
-        {q: "Quelle est la portée d’une variable déclarée avec 'let' en JavaScript ?", choices: ["Globale", "Locale au bloc", "Locale à la fonction", "Locale au fichier"], correct: 1},
+        {q: "Quelle est la portée d’une variable déclarée avec 'let' en JavaScript ?", choices: ["Locale au bloc","Globale",  "Locale à la fonction", "Locale au fichier"], correct: 2},
+        {q: "Quelle commande Linux permet de modifier l'adresse IP ?", choices: ["ip addr add", "ifconfig", "netplan", "Toutes les réponses"], correct: 3},
+        {q: "Quel outil est utilisé pour la virtualisation sous Windows ?", choices: ["Hyper-V", "VMware", "VirtualBox", "Tous"], correct: 3},
+        {q: "Comment vérifier l'intégrité d'un fichier ?", choices: ["Avec une somme de contrôle (MD5, SHA256)", "Avec Notepad", "Avec ping", "Avec Ctrl+Z"], correct: 0},
+        {q: "Qu’est-ce qu’un rootkit ?", choices: ["Un logiciel malveillant furtif", "Un outil de gestion", "Une mise à jour", "Un mot de passe admin"], correct: 0},
+        {q: "Comment se protéger des ransomwares ?", choices: ["Sauvegardes régulières, antivirus, vigilance", "Acheter un nouveau PC", "Changer de navigateur", "Installer plus de RAM"], correct: 0},
+        {q: "Que fait la commande `apt update && apt upgrade` ?", choices: ["Met à jour les paquets", "Supprime le système", "Lance Firefox", "Affiche les logs"], correct: 0},
+        {q: "Quel outil Linux affiche la consommation mémoire en temps réel ?", choices: ["top", "htop", "free", "Tous les précédents"], correct: 3},
         {q: "Quel est l’acronyme de 'URL' ?", choices: ["Uniform Resource Locator", "Universal Resource Link", "Unified Remote Login", "Universal Request Language"], correct: 0},
         {q: "Dans une base de données relationnelle, une 'clé primaire' sert à ?", choices: ["Identifier une ligne", "Relier des tables", "Stocker des données", "Indexer des colonnes"], correct: 0},
         {q: "Lequel n’est pas un langage de programmation ?", choices: ["HTML", "Java", "C++", "Python"], correct: 0}
@@ -291,6 +341,16 @@
 
       levelDisplay.textContent = `Niveau ${currentLevel} - Question ${currentQuestionIndex + 1} / ${quizData[currentLevel].length}`;
     }
+    function savePlayerName() {
+  const name = document.getElementById("playerName").value.trim();
+  if (!name) {
+    alert("Veuillez entrer votre nom !");
+    return;
+  }
+  sessionStorage.setItem("playerName", name); // ou localStorage
+  window.location.href = "quiz.html"; // redirige vers la page du quiz
+}
+
 
     function selectAnswer(selectedIndex) {
       clearInterval(timerInterval);
@@ -356,6 +416,13 @@
         }
       }, 1000);
     }
+    function showFinalScore(score, total) {
+  const name = sessionStorage.getItem("playerName") || "Joueur";
+  const resultText = `${name}, vous avez obtenu ${score} sur ${total} !`;
+  document.getElementById("result").innerText = resultText;
+  document.getElementById("resultContainer").style.display = "block";
+}
+
 
     function endQuiz() {
       document.getElementById("quiz-container").style.display = "none";
